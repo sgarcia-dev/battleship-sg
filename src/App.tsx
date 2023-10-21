@@ -107,6 +107,7 @@ export default function App() {
 
   // place ships on the game board
   useEffect(() => {
+    // TODO: move to inital state definition of board state to avoid this needless effect
     setBoardState((boardState) => {
       const newBoardState = [
         ...boardState.map((rowColumns) => [...rowColumns]),
@@ -126,6 +127,8 @@ export default function App() {
       return newBoardState;
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // HELPER METHODS
 
   const updateCellState = (cellState: CellState) => {
     setBoardState((boardState) => {
@@ -148,11 +151,14 @@ export default function App() {
     });
   };
 
+  
   const recordAction = (action: string) => {
     setActionLog((actionLog) => {
       return [...actionLog, action];
     });
   };
+
+  // EVENT HANDLERS
 
   const fireShot = (cellState: CellState) => {
     const x = cellState.coordinates[0];
@@ -229,6 +235,7 @@ export default function App() {
   );
 }
 
+// TODO: Move to own file
 type CellProps = {
   cellState: CellState;
   shipState: Ship | null;
